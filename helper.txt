@@ -1,3 +1,6 @@
 npm init -> Create package.json
 
 npm install express@4.16.3 --save-exact -> Create package-lock.json
+
+npm install nodemon@1.18.4 --save-dev --save-exact -> Create nodemon
+npm install -g nodemon@1.18.4 --save-exact -> Permite executar nodemon no terminal

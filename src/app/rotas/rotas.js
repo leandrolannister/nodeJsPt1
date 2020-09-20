@@ -10,4 +10,8 @@ module.exports = (app) => {
   app.get('/html', function(req, resp){
     resp.end('html');  
   });
+
+  app.get('/java', function(req, resp){
+    resp.end('java');  
+  });
 }
