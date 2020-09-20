@@ -1,9 +1,9 @@
-const http = require('http');
+const app = require('./src/app/config/express-custom');
 
-const server = http.createServer(function(req, resp){
-   resp.end('I am alive');
+app.get('/', function(req, resp){
+   resp.end('I am alive2');
 });
 
-server.listen(3000, function(){
+app.listen(3000, function(){
    console.log('Server is running');
 });
