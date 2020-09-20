@@ -1,19 +1,25 @@
 module.exports = (app) => {
   app.get('/', function(req, resp){
-    resp.end('Raiz');  
+    resp.end('Menu');  
   });
 
-  app.get('/php', function(req, resp){
+  app.get('/livros', function(req, resp){
     resp.marko(
-        require('../views/lista/livros.marko')
+        require('../views/lista/livros.marko'),
+        {
+          livros: [
+            { 
+              id: 1,
+              titulo: 'Fundamentos do Node'
+            },
+            { 
+              id: 2,
+              titulo: 'Node Avançado'
+            }
+          ]
+        }
     );      
   });
 
-  app.get('/html', function(req, resp){
-    resp.end('html');  
-  });
-
-  app.get('/java', function(req, resp){
-    resp.end('java');  
-  });
+  
 }
