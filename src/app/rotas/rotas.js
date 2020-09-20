@@ -4,7 +4,9 @@ module.exports = (app) => {
   });
 
   app.get('/php', function(req, resp){
-    resp.end('PHP');  
+    resp.marko(
+        require('../views/lista/livros.marko')
+    );      
   });
 
   app.get('/html', function(req, resp){
