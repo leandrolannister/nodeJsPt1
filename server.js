@@ -1,4 +1,4 @@
-const app = require('./src/app/config/express-custom');
+const app = require('./src/config/express-custom');
 
 app.listen(3000, function(){
    console.log('Server is running');
