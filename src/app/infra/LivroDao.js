@@ -1,3 +1,5 @@
+const { ___resolveComponentKey } = require("marko/src/components/renderer");
+
 class LivroDao{
   
   constructor(db){
@@ -5,12 +7,19 @@ class LivroDao{
    this._query = "SELECT * FROM LIVROS";
   }
 
-  lista(callback){
-    this._db.all(
-      this._query,
-      (error, result) => callback(error, result)
-    )
-  }
+  lista(){
+    return new Promise((resolve, reject) => {
+      this._db.all(
+        this._query,
+        (error, result) => { 
+          if (error){
+            return reject('Não foi possível listar os livros');
+          }  
+          return resolve(result)
+        }  
+      )            
+    });
+  }  
 }
 
 module.exports = LivroDao;

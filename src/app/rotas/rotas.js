@@ -9,13 +9,12 @@ module.exports = (app) => {
   app.get('/livros', function(req, resp){
     
     const livroDao = new LivroDao(db);
-
-    livroDao.lista(function(error, result){
-      resp.marko(  
-        require('../views/lista/livros.marko'),
-        { livros: result });
-    });
-  });
-
-  
+    
+    livroDao.lista()
+    .then(livros => resp.marko(  
+      require('../views/lista/livros.marko'),
+      { livros: livros } 
+    ))
+    .catch(error => console.log(error));    
+  });  
 }
