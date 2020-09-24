@@ -9,8 +9,10 @@ module.exports = (app) => {
 
   app.post('/livros', function(req, resp){    
     const livroDao = new LivroDao(db);
-    //livroDao.store();
-    console.log(req.body)    
+    
+    livroDao.store(req.body)
+      .then()
+      .catch(erro => console.log(erro));    
   });
 
   app.get('/livros', function(req, resp){
