@@ -2,8 +2,15 @@ const db = require('../../config/database');
 const LivroDao = require('../infra/LivroDao');
 
 module.exports = (app) => {
-  app.get('/', function(req, resp){
-    resp.end('Menu');  
+  
+  app.get('/livros/form', function(req, resp){
+     resp.marko(require('../views/form/form.marko'));   
+  });
+
+  app.post('/livros', function(req, resp){    
+    const livroDao = new LivroDao(db);
+    //livroDao.store();
+    console.log(req.body)    
   });
 
   app.get('/livros', function(req, resp){
