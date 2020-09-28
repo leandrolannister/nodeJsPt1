@@ -4,19 +4,45 @@
   <meta charset="utf-8">
 </head>
 <body>
-  <table>
+  <table id="livros">
     <thead>
       <tr>
         <th>Id</th>
         <th>Nome</th>
+        <td>Preço</td>
+        <td>Editar</td>
+        <td>Remover</td>
       </tr>
     </thead>  
     <tbody>
-      <tr for (livro in data.livros)>
+      <tr id="livro_${livro.id}" for (livro in data.livros)>
         <td>${livro.id}</td>
         <td>${livro.titulo}</td>
+        <td>${livro.preco}</td>
+        <td><a href="#">Editar</a></td> 
+        <td><a href="#" data-ref="${livro.id}" data-type="remocao">Remover</a></td> 
       </tr>            
     </tbody>
   </table>
  </body>   
 </html>
+<script>
+  let tabLivros = document.querySelector('#livros');
+
+tabLivros.addEventListener('click', function(event){
+    let elementClick = event.target;
+
+    if(elementClick.dataset.type == 'remocao'){
+        let livroId = elementClick.dataset.ref;
+        fetch(`http://localhost:3000/livros/${livroId}`, 
+          { method: `DELETE` }
+          .then(resposta => {
+            let tr = elementClick.closest(`#livro_${livroId}`);
+            tr.remove();
+          })
+          .catch(erro => console.log(erro))
+        )
+    }
+});
+</script>
+
