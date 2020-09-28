@@ -48,7 +48,7 @@ function render(input, out, __component, component, state) {
 
   await_reorderer_tag({}, out, __component, "24");
 
-  out.w("</body> </html><script>\r\n  let tabLivros = document.querySelector('#livros');\r\n\r\ntabLivros.addEventListener('click', function(event){\r\n    let elementClick = event.target;\r\n\r\n    if(elementClick.dataset.type == 'remocao'){\r\n        let livroId = elementClick.dataset.ref;\r\n        fetch(`http://localhost:3000/livros/${livroId}`, \r\n          { method: `DELETE` }\r\n          .then(resposta => {\r\n            let tr = elementClick.closest(`#livro_${livroId}`);\r\n            tr.remove();\r\n          })\r\n          .catch(erro => console.log(erro))\r\n        )\r\n    }\r\n});\r\n</script>");
+  out.w("</body> </html><script src=\"/estatico/js/removeLivro.js\">\r\n </script> ");
 }
 
 marko_template._ = marko_renderer(render, {
