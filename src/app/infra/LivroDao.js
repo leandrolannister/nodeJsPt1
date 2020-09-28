@@ -19,7 +19,8 @@ class LivroDao{
       )            
     });
   } 
-  
+
+   
   store(livro) {
     let query = `INSERT INTO livros(
       titulo,
@@ -34,9 +35,24 @@ class LivroDao{
         livro.descricao
       ], (erro, result) => {
         if(erro){
-          return reject('Não foi possível listar os livros')
+          return reject('Não foi possível cadastrar o livro')
         }
         return resolve(result);
+      });      
+    });
+  }
+
+  delete(id) {
+    let query = `DELETE FROM livros
+      WHERE ID = ?`;
+
+    return new Promise((resolve, reject) => {
+      this._db.run(query, 
+        (erro, result) => {
+          if(erro){
+            return reject('Não foi possível remover o livro')
+          }
+          return resolve(result);          
       });      
     });
   }
