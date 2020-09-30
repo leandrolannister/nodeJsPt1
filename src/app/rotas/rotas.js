@@ -4,7 +4,7 @@ const LivroDao = require('../infra/LivroDao');
 module.exports = (app) => {
   
   app.get('/livros/form', function(req, resp){
-     resp.marko(require('../views/form/form.marko'));   
+     resp.marko(require('../views/form/form.marko'), { livro: {}});   
   });
 
   app.post('/livros', function(req, resp){    
@@ -28,8 +28,7 @@ module.exports = (app) => {
   });
   
   app.delete('/livros/:id', function(req, resp){
-     const id = req.params.id;
-
+     const { id } = req.params;
      const livroDao = new LivroDao(db);
      
      livroDao.delete(id)
@@ -37,5 +36,18 @@ module.exports = (app) => {
       .catch(erro => console.log(erro)); 
   });
 
-  
+  app.get('/livro/form/:id', function(req, resp){
+    const id = req.params.id;
+    const livroDao = new LivroDao(db);
+
+    livroDao.find(id)
+      .then(livro => 
+        
+        resp.marko(
+          require('../views/form/form.marko'),
+          { livro: livro }
+      )
+    ).catch(erro => console.log(erro));
+
+  });  
 }

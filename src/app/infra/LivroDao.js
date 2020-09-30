@@ -44,7 +44,7 @@ class LivroDao{
 
   delete(id) {
     let query = `DELETE FROM livros
-      WHERE ID = ?`;
+      WHERE id = ?`;
 
     return new Promise((resolve, reject) => {
       this._db.run(query, 
@@ -56,6 +56,28 @@ class LivroDao{
       });      
     });
   }
+
+  find(id) {
+    let query = `SELECT * FROM livros
+      WHERE ID = ?`;
+
+    return new Promise((resolve, reject) => {
+      this._db.get(query,[
+        id
+      ], (erro, result) => {
+          
+          if(erro){
+            return reject('Não foi possível encontrar o livro')
+          }
+          console.log(result);
+          return resolve(result);          
+      });      
+    });
+  }
+
+  
 }
+
+
 
 module.exports = LivroDao;
