@@ -21,6 +21,7 @@
     "body-parse": "0.1.0",
     "express": "^4.16.3",
     "marko": "4.13.4-1",
+    "method-override": "3.0.0",
     "sqlite3": "5.0.0"
   },
   "devDependencies": {

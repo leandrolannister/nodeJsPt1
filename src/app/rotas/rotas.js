@@ -13,7 +13,7 @@ module.exports = (app) => {
     livroDao.store(req.body)
       .then(resp.redirect('/livros'))
       .catch(erro => console.log(erro));    
-  });
+  }); 
 
   app.get('/livros', function(req, resp){
     
@@ -49,5 +49,13 @@ module.exports = (app) => {
       )
     ).catch(erro => console.log(erro));
 
-  });  
+  });
+  
+  app.put('/livros', function(req, resp){    
+    const livroDao = new LivroDao(db);
+    
+    livroDao.update(req.body)
+      .then(resp.redirect('/livros'))
+      .catch(erro => console.log(erro));    
+  });
 }

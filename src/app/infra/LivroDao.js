@@ -45,10 +45,11 @@ class LivroDao{
   delete(id) {
     let query = `DELETE FROM livros
       WHERE id = ?`;
-
+    
     return new Promise((resolve, reject) => {
-      this._db.run(query, 
+      this._db.run(query, [ id ],
         (erro, result) => {
+          
           if(erro){
             return reject('Não foi possível remover o livro')
           }
@@ -75,9 +76,27 @@ class LivroDao{
     });
   }
 
-  
+  update(livro){
+    let query = `UPDATE livros
+      SET titulo = ?,
+          preco = ?,  
+          descricao = ?          
+      WHERE id = ?`;
+
+    return new Promise((resolve, reject) => {
+      this._db.run(query ,[
+        livro.titulo,
+        livro.preco,
+        livro.descricao,
+        livro.id
+      ], (erro, result) => {
+        console.log(erro);
+        if(erro){
+          return reject('Não foi possível cadastrar o livro')
+        }
+        return resolve(result);
+      });      
+    });        
+  }  
 }
-
-
-
 module.exports = LivroDao;
